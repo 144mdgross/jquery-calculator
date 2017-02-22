@@ -6,7 +6,7 @@ $(document).ready(function() {
     var answer = 0
     var firstEntry = 0
     var operation = null //will hold operator for use later
-    var currentEntry = '0'
+    var currentEntry = ''
     // updateScreen(currentEntry)//calling updateScreen here. It will show zero until later code changes it.
 
 
@@ -15,28 +15,25 @@ $(document).ready(function() {
     $('.buttons').click(function(e) {
         //console.log('buttons')
         var clickedButton = $(e.target).text()
-        console.log(clickedButton)
         //create control flow for all possibilities within this event listener
         //if ()clear button possibility
         if (clickedButton === "C") {
-            console.log("you clicked clear")
+
             //now clear the things...do I need to clear all the things? Ima clear them all.
             answer = 0
             firstEntry = 0
             operation = null
-            currentEntry = "0"
+            currentEntry = ""
         }
         //else if ()use callback function to check if buttons are a number
         //if it is a number check it against current entry. if it's zero make current entry equal to the button pressed. If it's not concat current entry with button pressed.
         else if (isNumber(clickedButton)) {
             //what to do if I want a number more than one digit long?
-            if (currentEntry === 0) {
+            if (currentEntry === '') {
                 currentEntry = clickedButton
-                console.log(currentEntry, "currentEntry")
-                updateScreen(firstEntry)
+                updateScreen(currentEntry)
             } else {
                 currentEntry = currentEntry + clickedButton
-                console.log("adding to currentEntry", currentEntry)
                 updateScreen(currentEntry)
             }
         }
@@ -47,13 +44,10 @@ $(document).ready(function() {
         else if (dialOperator(clickedButton)) {
             //turn entry into a number
             firstEntry = parseInt(currentEntry, 10)
-            console.log(typeof firstEntry, "type of first entry")
             //save current operation
             operation = clickedButton
-            console.log("operation", operation)
             //clear current entry
             currentEntry = ''
-            console.log(currentEntry, "currentEntry")
 
         } else if (clickedButton === "=") {
             //call operate function on variables that have been set up.
